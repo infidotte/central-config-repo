@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/db_accountservice}
-    username: ${DB_USERNAME:accountservice}
-    password: ${DB_PASSWORD:accountservice_pwd}
+    url: jdbc:postgresql://172.17.1.54:30082/accountservice_db
+    username: clientservice_admin
+    password: clientservice_password
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: db/changelog/changelog-master.yml
@@ -14,7 +14,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URL:http://localhost:8084/eureka}
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
   instance:
     prefer-ip-address: true
 account-closure-notification:
