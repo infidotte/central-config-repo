@@ -17,15 +17,3 @@ eureka:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
   instance:
     prefer-ip-address: true
-account-closure-notification:
-  topic: closure_account-notification
-services:
-  infoservice:
-    stub-enabled: ${INFOSERVICE_STUB:true}
-    name: "infoservice"
-    path: "/api/v1/infoservice"
-    url:
-  clientservice:
-    name: "clientservice"
-    path: "/api/v1/clientservice"
-    url:
