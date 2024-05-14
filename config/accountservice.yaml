@@ -14,7 +14,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URL:172.17.1.54:30081/eureka}
+      defaultZone: ${EUREKA_URL:eureka-service:8761/eureka}
   instance:
     prefer-ip-address: true
 account-closure-notification:
