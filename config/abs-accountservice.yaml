@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: accountservice
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/db_accountservice}
+    username: ${DB_USERNAME:accountservice}
+    password: ${DB_PASSWORD:accountservice_pwd}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db/changelog/changelog-master.yml
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+  kafka:
+    bootstrap-servers: ${KAFKA_URL:localhost:9092}
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8084/eureka}
+  instance:
+    prefer-ip-address: true
+account-closure-notification:
+  topic: closure_account-notification
+services:
+  infoservice:
+    stub-enabled: ${INFOSERVICE_STUB:true}
+    name: "infoservice"
+    path: "/api/v1/infoservice"
+    url:
+  clientservice:
+    name: "clientservice"
+    path: "/api/v1/clientservice"
+    url:
