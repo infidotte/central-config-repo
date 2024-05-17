@@ -1,0 +1,54 @@
+server:
+  port: ${GATEWAY_PORT:8085}
+spring:
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    key-prefix: "api-gateway"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: card-service-route
+          uri: lb://cardservice
+          predicates:
+            - Path=/api/v1/cardservice/**
+          filters:
+            - AccessTokenFilter=
+            - RemoveRequestHeader=Authorization
+        - id: client-service-route
+          uri: lb://clientservice
+          predicates:
+            - Path=/api/v1/clientservice/**
+          filters:
+            - AccessTokenFilter=
+            - RemoveRequestHeader=Authorization
+        - id: account-service-route
+          uri: lb://accountservice
+          predicates:
+            - Path=/api/v1/accountservice/**
+          filters:
+            - AccessTokenFilter=
+            - RemoveRequestHeader=Authorization
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8081/eureka}
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+jwt:
+  secret:
+    access: qBTmv4oXFFR2GwjexDJ4t6fsIUIUhhXqlktXjXdkcyygs8nPVEwMfo29VDRRepYDVV5IkIxBMzr7OEHXEHd37w==
+    refresh: zL1HB3Pch05Avfynovxrf/kpF9O2m4NCWKJUjEp27s9J2jEG3ifiKCGylaZ8fDeoONSTJP/wAzKawB8F9rOMNg==
+  accessExpirationMinutes: 5
+  refreshExpirationDays: 30
+userServiceUrl: ""
+userServicePath: /userservice
+api-gateway:
+  isStubEnabled: ${IS_STUB_ENABLED:true}
+  isMasterTokenEnabled: ${IS_MASTER_TOKEN_ENABLED:true}
