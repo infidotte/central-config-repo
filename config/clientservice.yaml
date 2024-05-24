@@ -1,14 +1,14 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/boomerang_db
+    url: jdbc:postgresql://172.17.1.54:30082/boomerang_db
     username: clientservice_admin
     password: clientservice_password
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: 172.17.1.3:30092
 topic:
   registration-notification: registration_customer-notification
   open-new-account: deposit_open-new-deposit
 eureka:
   client:
     service-url:
-      defaultZone: eureka-service:8761/eureka
+      defaultZone: http://localhost:8761/eureka
